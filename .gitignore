@@ -1,0 +1,40 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.techeng/
+techeng/
+
+
+# Database
+db.sqlite3
+*.sqlite3
+db.sqlite3
+
+# Local settings & secrets
+.env
+*.local
+local_settings.py
+
+# Media & static files (if local)
+media/
+/media/
+/static/
+/staticfiles/
+
+# Logs & temporary files
+*.log
+*.tmp
+*.cache
+
+# IDE files
+.vscode/
+.idea/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
