@@ -1,37 +1,20 @@
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from . import views
 
 
 urlpatterns = [
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    # Включаем все стандартные URL-адреса аутентификации
+    path('', include('django.contrib.auth.urls')),
 
-     # url-адреса смены пароля
-    path('password-change/',
-        auth_views.PasswordChangeView.as_view(),
-        name='password_change'),
-    path('password-change/done/',
-        auth_views.PasswordChangeDoneView.as_view(),
-        name='password_change_done'),
-
-    # url-адреса сброса пароля
+    # Переопределяем только password_reset с кастомными шаблонами
     path('password-reset/',
         auth_views.PasswordResetView.as_view(
             template_name='registration/password_reset_form.html',
-            email_template_name='registration/password_reset_email.html',       # ← текстовая версия (опционально)
-            html_email_template_name='registration/password_reset_email.html',  # ← HTML-версия
+            email_template_name='registration/password_reset_email.html',
+            html_email_template_name='registration/password_reset_email.html',
         ),
         name='password_reset'),
-    path('password-reset/done/',
-        auth_views.PasswordResetDoneView.as_view(),
-        name='password_reset_done'),
-    path('password-reset/<uidb64>/<token>/',
-        auth_views.PasswordResetConfirmView.as_view(),
-        name='password_reset_confirm'),
-    path('password-reset/complete/',
-        auth_views.PasswordResetCompleteView.as_view(),
-        name='password_reset_complete'),
 
     path('', views.dashboard, name='dashboard'),
 ]
